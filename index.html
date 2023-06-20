@@ -365,14 +365,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
-
                     <!-- Content Row -->
                     <div class="row">
 
@@ -422,7 +420,7 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id = 'uvIndex'></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id = 'uv-index'></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -449,7 +447,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Wind Speed (Km/H)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id = 'windSpeed'></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id = 'wind-speed'></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -478,43 +476,38 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-header">Options:</div>
+                                            <a class="dropdown-item" href="#">Line Chart</a>
+                                            <a class="dropdown-item" href="#">Bar Chart</a>
+                                            <a class="dropdown-item" href="#">Pie Chart</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
-                                <!-- <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myChart"></canvas>
+                                <div class="card-body">
+                                    <div class="chart-area ml-5">
+                                        <canvas id="myLineChart"></canvas>
                                     </div>
-                                </div> -->
-                                <div class="chart-area">
-                                    <canvas id="myChart"></canvas>
+                                    <div class="chart-area ml-5">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-
                         </div>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-12 mb-4 align-content-center align-items-center">
 
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">INOCAR Reports</h6>
                                 </div>
                                 <div class="card-body">
-                                    
+                                    <div id = "table-container"></div>
                                      
                                     <!-- <h4 class="small font-weight-bold">Server Migration <span
                                             class="float-right">20%</span></h4>
@@ -622,7 +615,7 @@
                         <div class="col-lg-6 mb-4">
 
                             <!-- Illustrations -->
-                            <div class="card shadow mb-4">
+                            <!-- <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                                 </div>
@@ -638,9 +631,7 @@
                                     <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
                                         unDraw &rarr;</a>
                                 </div>
-                            </div>
-
-
+                            </div> -->
 
                         </div>
                     </div>
@@ -651,14 +642,7 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+
             <!-- End of Footer -->
 
         </div>
@@ -695,7 +679,14 @@
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Climate Dashboard 2023</span>
+            </div>
+        </div>
+    </footer>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 

@@ -1,102 +1,109 @@
-let plot = (data) => { 
-  const ctx = document.getElementById('myChart');
+let plotLineChart = (data) => {
+  const ctx = document.getElementById("myLineChart");
   const dataset = {
-    labels: data.hourly.time, /* ETIQUETA DE DATOS */   //REPRESENTA EL EJE X (TIME)
-    datasets: [{
-        axis:'y',
-        label: 'Temperatura semanal', /* ETIQUETA DEL GRÁFICO */  //TITULO DEL GRAFICO
-        data: data.hourly.temperature_2m, /* ARREGLO DE DATOS */  //SON LOS VALORES QUE SE VAN A MOSTRAR EN EL CANVAS
-        fill: false,  
-        borderColor: 'rgb(75, 192, 192)',
+    labels: data.hourly.time,
+    datasets: [
+      {
+        label: "Weekly temperature",
+        data: data.hourly.temperature_2m,
+        fill: false,
+        borderColor: "rgb(75, 192, 192)",
         tension: 0.1,
-        backgroundColor:'rgba(255, 99, 132, 0.2)'
-    }]
+      },
+    ],
+  };
+  const config = {
+    type: "line",
+    data: dataset,
+  };
+  const chart = new Chart(ctx, config);
 };
 
-
-const config = {
-  type: 'bar',
-  data: dataset,
-
+let plotBarChart = (data) => {
+  const ctx = document.getElementById("myBarChart");
+  const dataset = {
+    labels: data.daily.time,
+    datasets: [
+      {
+        label: "Daily UV-Index",
+        data: data.daily.uv_index_max,
+        fill: false,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 205, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(201, 203, 207, 0.2)",
+        ],
+        tension: 0.1,
+      },
+    ],
+  };
+  const config = {
+    type: "bar",
+    data: dataset,
+  };
+  const chart = new Chart(ctx, config);
 };
-const chart = new Chart(ctx, config)
-}
-
-
 
 let load = (data) => {
-  let URL =
-    "https://api.open-meteo.com/v1/forecast?latitude=-2.15&longitude=-79.97&hourly=uv_index&daily=temperature_2m_max,uv_index_max,precipitation_sum,windspeed_10m_max&timezone=auto";
-  fetch(URL) //Fetch retorna una promesa. Permite hacer peticiones a un endpoint
-    /*
-Posibles estados de una promesa: Sale bien o sale mal, si no sale bien se usa un catch al que se manda un
-callback.
-Si se cumple la promesa, hay que deserializar
-*/
-    .then((response) => response.json())
+  //Setting the data
+  let timezone = data["timezone"];
+  let timezoneHTML = document.getElementById("timezone");
+  timezoneHTML.textContent = timezone;
+
+  let temperature = data["hourly"]["temperature_2m"][0];
+  let temperatureHTML = document.getElementById("temperature");
+  temperatureHTML.textContent = temperature;
+
+  let uvIndex = data["daily"]["uv_index_max"][0];
+  let uvIndexHTML = document.getElementById("uv-index");
+  uvIndexHTML.textContent = uvIndex;
+
+  let windSpeed = data["hourly"]["windspeed_10m"][0];
+  let windSpeedHTML = document.getElementById("wind-speed");
+  windSpeedHTML.textContent = windSpeed;
+
+  plotLineChart(data);
+  plotBarChart(data);
+};
+
+let loadInocar = () => {
+  let URL_proxy = 'http://localhost:8080/'
+  let URL = URL_proxy+"https://www.inocar.mil.ec/mareas/consultan.php";
+
+  fetch(URL)
+    .then((response) => response.text())
     .then((data) => {
-      load(data)
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(data, "text/html");
+      console.log(xml);
+      let contenedorMareas = xml.getElementsByTagName('div')[0];
+      let contenedorHTML = document.getElementById('table-container');
+      contenedorHTML.innerHTML = contenedorMareas.innerHTML;
     })
     .catch(console.error);
 };
 
-
-
-
-
-(function () {
-  let URL =
-    "https://api.open-meteo.com/v1/forecast?latitude=-2.15&longitude=-79.97&hourly=temperature_2m&daily=uv_index_max&timezone=auto";
-  fetch(URL) //Fetch retorna una promesa. Permite hacer peticiones a un endpoint
-    /*
-  Posibles estados de una promesa: Sale bien o sale mal, si no sale bien se usa un catch al que se manda un
-  callback.
-  Si se cumple la promesa, hay que deserializar
-  */
-    .then((response) => response.json())
-    .then((data) => {
-      //Timezone
-      // let timezone = data["timezone"];
-      // let timezoneHTML = document.getElementById("timezone");
-      // timezoneHTML.textContent = timezone;
-
-      // //Temperature
-      // let temperature = data["daily"]["temperature_2m_max"][0];
-      // let temperatureHTML = document.getElementById("temperature");
-      // temperatureHTML.textContent = temperature;
-
-      // //UV-Index
-      // let uvIndex = data["daily"]["uv_index_max"][0];
-      // let uvIndexHTML = document.getElementById("uvIndex");
-      // uvIndexHTML.textContent = uvIndex;
-
-      // //Wind speed
-      // let windSpeed = data["daily"]["windspeed_10m_max"][0];
-      // let temperaturaHTML = document.getElementById("windSpeed");
-      // temperaturaHTML.textContent = windSpeed;
-
-      plot(data)
-    })
-    .catch(console.error);
-})();
-
+// IIFE
 (function () {
   let meteo = localStorage.getItem("meteo");
-  if (meteo == null) {
-    let URL = "https://api.open-meteo.com/v1/forecast?latitude=-2.15&longitude=-79.97&hourly=temperature_2m&daily=uv_index_max&timezone=auto"
-
+  if (meteo != null) {
+    let URL =
+      "https://api.open-meteo.com/v1/forecast?latitude=-2.15&longitude=-79.88&hourly=temperature_2m,windspeed_10m&daily=uv_index_max&timezone=auto";
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
         load(data);
-        
-        /* GUARDAR DATA EN MEMORIA */
-        localStorage.setItem("meteo", JSON.stringify(data))
+        //Storing data in memory
+        localStorage.setItem("meteo", JSON.stringify(data));
       })
       .catch(console.error);
-  } else {  
-    /* CARGAR DATA EN MEMORIA */
-    load(JSON.parse(meteo))
+  } else {
+    //Loading data from memory
+    load(JSON.parse(meteo));
   }
+  loadInocar();
 })();
-
