@@ -90,7 +90,7 @@ let loadInocar = () => {
 // IIFE
 (function () {
   let meteo = localStorage.getItem("meteo");
-  if (meteo != null) {
+  if (meteo == null) {
     let URL =
       "https://api.open-meteo.com/v1/forecast?latitude=-2.15&longitude=-79.88&hourly=temperature_2m,windspeed_10m&daily=uv_index_max&timezone=auto";
     fetch(URL)
@@ -103,7 +103,7 @@ let loadInocar = () => {
       .catch(console.error);
   } else {
     //Loading data from memory
-    load(JSON.parse(meteo));
+    // load(JSON.parse(meteo));
   }
   loadInocar();
 })();
