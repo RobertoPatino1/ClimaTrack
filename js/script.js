@@ -103,7 +103,7 @@ let loadInocar = () => {
       .catch(console.error);
   } else {
     //Loading data from memory
-    // load(JSON.parse(meteo));
+    load(JSON.parse(meteo));
   }
   loadInocar();
 })();
