@@ -15,6 +15,10 @@ let plotLineChart = (data) => {
   const config = {
     type: "line",
     data: dataset,
+    options:{
+      maintainAspectRatio:false,
+      responsive:true
+    }
   };
   const chart = new Chart(ctx, config);
 };
@@ -29,13 +33,13 @@ let plotBarChart = (data) => {
         data: data.daily.uv_index_max,
         fill: false,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(255, 205, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(201, 203, 207, 0.2)",
+          "rgba(214, 115, 130, 0.7)",
+          "rgba(240, 133, 114, 0.7)",
+          "rgba(246, 157, 109, 0.7)",
+          "rgba(251, 187, 108, 0.7)",
+          "rgba(253, 219, 115, 0.7)",
+          "rgba(242, 242, 122, 0.7)",
+          "rgba(225, 228, 132, 0.7)",
         ],
         tension: 0.1,
       },
@@ -44,6 +48,11 @@ let plotBarChart = (data) => {
   const config = {
     type: "bar",
     data: dataset,
+    options:{
+      indexAxis: 'y',
+      maintainAspectRatio:false,
+      responsive:true
+    }
   };
   const chart = new Chart(ctx, config);
 };
