@@ -1,12 +1,14 @@
 let plotLineChart = (data) => {
   const ctx = document.getElementById("myLineChart");
+  
   const dataset = {
     labels: data.hourly.time,
     datasets: [
       {
         label: "Weekly temperature",
         data: data.hourly.temperature_2m,
-        fill: false,
+        fill: true,
+        backgroundColor:'rgba(225, 228, 132, 0.2)',
         borderColor: "#fbbb6c",
         tension: 0.1,
       },
@@ -95,6 +97,21 @@ let loadInocar = () => {
     })
     .catch(console.error);
 };
+
+
+// Function to change the graph according to what the user selects
+let changeGraph = (chartType) => {
+  if(chartType=="line"){
+    plotLineChart()
+    //Plot line chart
+  }else if(chartType=="bar"){
+    plotBarChart()
+    //Plot bar chart
+  }else if(chartType=="pie"){
+    //Plot pie chart
+  }
+
+}
 
 // IIFE
 (function () {
