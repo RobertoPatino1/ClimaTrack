@@ -7,7 +7,7 @@ let plotLineChart = (data) => {
         label: "Weekly temperature",
         data: data.hourly.temperature_2m,
         fill: false,
-        borderColor: "#bae8e8",
+        borderColor: "#fbbb6c",
         tension: 0.1,
       },
     ],
