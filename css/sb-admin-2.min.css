@@ -5935,7 +5935,7 @@ button.bg-success:hover {
   background-color: #169b6b !important;
 }
 .bg-info {
-  background-color: #36b9cc !important;
+  background-color: #f0bd44  !important;
 }
 a.bg-info:focus,
 a.bg-info:hover,
@@ -8835,7 +8835,7 @@ button.bg-dark:hover {
   color: #fff !important;
 }
 .text-primary {
-  color: #4e73df !important;
+  color: #ffd656  !important;
 }
 a.text-primary:focus,
 a.text-primary:hover {
@@ -8849,21 +8849,21 @@ a.text-secondary:hover {
   color: #60616f !important;
 }
 .text-success {
-  color: #1cc88a !important;
+  color: #ffb400  !important;
 }
 a.text-success:focus,
 a.text-success:hover {
   color: #13855c !important;
 }
 .text-info {
-  color: #36b9cc !important;
+  color: #f0bd44  !important;
 }
 a.text-info:focus,
 a.text-info:hover {
   color: #258391 !important;
 }
 .text-warning {
-  color: #f6c23e !important;
+  color: #f69d6d !important;
 }
 a.text-warning:focus,
 a.text-warning:hover {
@@ -9111,8 +9111,8 @@ a:focus {
   animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
 .bg-gradient-primary {
-  background-color: #f6c23e;
-  background-image: linear-gradient(180deg, #f6c23e 10%, #f6c23e 100%);
+  background-color: #f0bd44;
+  /* background-image: linear-gradient(180deg, #f0bd44 10%, #f0bd44 100%); */
   background-size: cover;
 }
 .bg-gradient-secondary {
@@ -9222,7 +9222,7 @@ a:focus {
   justify-content: center;
 }
 .border-left-primary {
-  border-left: 0.25rem solid #4e73df !important;
+  border-left: 0.25rem solid #ffd656 !important;
 }
 .border-bottom-primary {
   border-bottom: 0.25rem solid #4e73df !important;
@@ -9234,22 +9234,22 @@ a:focus {
   border-bottom: 0.25rem solid #858796 !important;
 }
 .border-left-success {
-  border-left: 0.25rem solid #1cc88a !important;
+  border-left: 0.25rem solid #ffb400 !important;
 }
 .border-bottom-success {
   border-bottom: 0.25rem solid #1cc88a !important;
 }
 .border-left-info {
-  border-left: 0.25rem solid #36b9cc !important;
+  border-left: 0.25rem solid #f0bd44 !important;
 }
 .border-bottom-info {
   border-bottom: 0.25rem solid #36b9cc !important;
 }
 .border-left-warning {
-  border-left: 0.25rem solid #f6c23e !important;
+  border-left: 0.25rem solid #f69d6d !important;
 }
 .border-bottom-warning {
-  border-bottom: 0.25rem solid #f6c23e !important;
+  border-bottom: 0.25rem solid #fddb73 !important;
 }
 .border-left-danger {
   border-left: 0.25rem solid #e74a3b !important;
