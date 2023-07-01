@@ -58,7 +58,53 @@ let plotBarChart = (data) => {
   };
   const chart = new Chart(ctx, config);
 };
+function initMap() {
+  // Obtener referencia al elemento div
+  var mapHolder = document.getElementById('map-container');
 
+  // Obtener la ubicación actual del usuario si el navegador lo permite
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      // Crear mapa de OpenLayers con OpenStreetMap
+      var map = new ol.Map({
+        target: mapHolder,
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([longitude, latitude]),
+          zoom: 10
+        })
+      });
+
+      // Crear marcador en la ubicación actual
+      var marker = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([longitude, latitude]))
+      });
+      var markerStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+          src: 'https://openlayers.org/en/latest/examples/data/icon.png',
+          scale: 0.5
+        })
+      });
+      marker.setStyle(markerStyle);
+      var vectorSource = new ol.source.Vector({
+        features: [marker]
+      });
+      var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+      });
+      map.addLayer(vectorLayer);
+    });
+  } else {
+    mapHolder.innerHTML = "La geolocalización no es soportada por este navegador.";
+  }
+}
 let load = (data) => {
   //Setting the data
   let timezone = data["timezone"];
@@ -99,19 +145,7 @@ let loadInocar = () => {
 };
 
 
-// Function to change the graph according to what the user selects
-let changeGraph = (chartType) => {
-  if(chartType=="line"){
-    plotLineChart()
-    //Plot line chart
-  }else if(chartType=="bar"){
-    plotBarChart()
-    //Plot bar chart
-  }else if(chartType=="pie"){
-    //Plot pie chart
-  }
 
-}
 
 // IIFE
 (function () {
@@ -132,4 +166,5 @@ let changeGraph = (chartType) => {
     load(JSON.parse(meteo));
   }
   loadInocar();
+  initMap();
 })();
